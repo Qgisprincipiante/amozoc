@@ -35,8 +35,9 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
-        <script src="data/Federal_1.js"></script>
-        <script src="data/Estatal_2.js"></script>
+        <script src="data/municipios_1.js"></script>
+        <script src="data/Federal_2.js"></script>
+        <script src="data/Estatal_3.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
@@ -92,7 +93,50 @@
         });
         layer_OSMStandard_0;
         map.addLayer(layer_OSMStandard_0);
-        function pop_Federal_1(feature, layer) {
+        function pop_municipios_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">NOMGEO</th>\
+                        <td>' + (feature.properties['NOMGEO'] !== null ? autolinker.link(String(feature.properties['NOMGEO']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+			layer.on('popupopen', function(e) {
+				addClassToPopupIfMedia(content, e.popup);
+			});
+			layer.bindPopup(content, { maxHeight: 400 });
+        }
+
+        function style_municipios_1_0() {
+            return {
+                pane: 'pane_municipios_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,113,88,0.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_municipios_1');
+        map.getPane('pane_municipios_1').style.zIndex = 401;
+        map.getPane('pane_municipios_1').style['mix-blend-mode'] = 'normal';
+        var layer_municipios_1 = new L.geoJson(json_municipios_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_municipios_1',
+            layerName: 'layer_municipios_1',
+            pane: 'pane_municipios_1',
+            onEachFeature: pop_municipios_1,
+            style: style_municipios_1_0,
+        });
+        bounds_group.addLayer(layer_municipios_1);
+        map.addLayer(layer_municipios_1);
+        function pop_Federal_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['ID_RED'] !== null ? autolinker.link(String(feature.properties['ID_RED']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
@@ -172,9 +216,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Federal_1_0() {
+        function style_Federal_2_0() {
             return {
-                pane: 'pane_Federal_1',
+                pane: 'pane_Federal_2',
                 opacity: 1,
                 color: 'rgba(14,75,14,1.0)',
                 dashArray: '',
@@ -185,21 +229,21 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Federal_1');
-        map.getPane('pane_Federal_1').style.zIndex = 401;
-        map.getPane('pane_Federal_1').style['mix-blend-mode'] = 'normal';
-        var layer_Federal_1 = new L.geoJson(json_Federal_1, {
+        map.createPane('pane_Federal_2');
+        map.getPane('pane_Federal_2').style.zIndex = 402;
+        map.getPane('pane_Federal_2').style['mix-blend-mode'] = 'normal';
+        var layer_Federal_2 = new L.geoJson(json_Federal_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Federal_1',
-            layerName: 'layer_Federal_1',
-            pane: 'pane_Federal_1',
-            onEachFeature: pop_Federal_1,
-            style: style_Federal_1_0,
+            dataVar: 'json_Federal_2',
+            layerName: 'layer_Federal_2',
+            pane: 'pane_Federal_2',
+            onEachFeature: pop_Federal_2,
+            style: style_Federal_2_0,
         });
-        bounds_group.addLayer(layer_Federal_1);
-        map.addLayer(layer_Federal_1);
-        function pop_Estatal_2(feature, layer) {
+        bounds_group.addLayer(layer_Federal_2);
+        map.addLayer(layer_Federal_2);
+        function pop_Estatal_3(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <td colspan="2">' + (feature.properties['ID_RED'] !== null ? autolinker.link(String(feature.properties['ID_RED']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
@@ -278,9 +322,9 @@
 			layer.bindPopup(content, { maxHeight: 400 });
         }
 
-        function style_Estatal_2_0() {
+        function style_Estatal_3_0() {
             return {
-                pane: 'pane_Estatal_2',
+                pane: 'pane_Estatal_3',
                 opacity: 1,
                 color: 'rgba(19,40,177,1.0)',
                 dashArray: '',
@@ -291,20 +335,20 @@
                 interactive: true,
             }
         }
-        map.createPane('pane_Estatal_2');
-        map.getPane('pane_Estatal_2').style.zIndex = 402;
-        map.getPane('pane_Estatal_2').style['mix-blend-mode'] = 'normal';
-        var layer_Estatal_2 = new L.geoJson(json_Estatal_2, {
+        map.createPane('pane_Estatal_3');
+        map.getPane('pane_Estatal_3').style.zIndex = 403;
+        map.getPane('pane_Estatal_3').style['mix-blend-mode'] = 'normal';
+        var layer_Estatal_3 = new L.geoJson(json_Estatal_3, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_Estatal_2',
-            layerName: 'layer_Estatal_2',
-            pane: 'pane_Estatal_2',
-            onEachFeature: pop_Estatal_2,
-            style: style_Estatal_2_0,
+            dataVar: 'json_Estatal_3',
+            layerName: 'layer_Estatal_3',
+            pane: 'pane_Estatal_3',
+            onEachFeature: pop_Estatal_3,
+            style: style_Estatal_3_0,
         });
-        bounds_group.addLayer(layer_Estatal_2);
-        map.addLayer(layer_Estatal_2);
+        bounds_group.addLayer(layer_Estatal_3);
+        map.addLayer(layer_Estatal_3);
         setBounds();
         </script>
     </body>
